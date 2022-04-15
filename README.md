@@ -1,4 +1,4 @@
-# capsule-network-for-fault-diagnosis
+# Capsule-network-for-fault-diagnosis
 
 maxtrain>99%
 maxtest>98%
