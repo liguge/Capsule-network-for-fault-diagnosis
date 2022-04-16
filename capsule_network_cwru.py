@@ -4,7 +4,6 @@ sys.setrecursionlimit(15000)
 import torch
 import torch.nn.functional as F
 from torch import nn
-# from wmodels import Laplace_fast as fast
 
 BATCH_SIZE = 100
 NUM_CLASSES = 10
@@ -12,49 +11,6 @@ NUM_EPOCHS = 500
 NUM_ROUTING_ITERATIONS = 3
 
 
-
-# class h_sigmoid(nn.Module):
-#     def __init__(self, inplace=True):
-#         super(h_sigmoid, self).__init__()
-#         self.relu = nn.ReLU6(inplace=inplace)
-#
-#     def forward(self, x):
-#         return self.relu(x + 3) / 6
-#
-#
-# class h_swish(nn.Module):
-#     def __init__(self, inplace=True):
-#         super(h_swish, self).__init__()
-#         self.sigmoid = h_sigmoid(inplace=inplace)
-#
-#     def forward(self, x):
-#         return x * self.sigmoid(x)
-#
-#
-# class CoordAtt(nn.Module):
-#     def __init__(self, inp, oup, reduction=32):
-#         super(CoordAtt, self).__init__()
-#         # self.pool_w = nn.AdaptiveAvgPool1d(1)
-#         self.pool_w = nn.AdaptiveMaxPool1d(1)
-#         mip = max(6, inp // reduction)
-#         self.conv1 = nn.Conv1d(inp, mip, kernel_size=1, stride=1, padding=0)
-#         self.bn1 = nn.BatchNorm1d(mip)
-#         self.act = h_swish()
-#         self.conv_w = nn.Conv1d(mip, oup, kernel_size=1, stride=1, padding=0)
-#
-#     def forward(self, x):
-#         identity = x
-#         n, c, w = x.size()
-#         x_w = self.pool_w(x)
-#         y = torch.cat([identity, x_w], dim=2)
-#         y = self.conv1(y)
-#         y = self.bn1(y)
-#         y = self.act(y)
-#         x_ww, x_c = torch.split(y, [w, 1], dim=2)
-#         a_w = self.conv_w(x_ww)
-#         a_w = a_w.sigmoid()
-#         out = identity * a_w
-#         return out
 
 def softmax(input, dim=1):
     transposed_input = input.transpose(dim, len(input.size()) - 1)
@@ -124,8 +80,8 @@ class CapsuleLayer(nn.Module):
 class CapsuleNet(nn.Module):
     def __init__(self):
         super(CapsuleNet, self).__init__()
-        self.p1_1 = nn.Sequential(fast(out_channels=50, kernel_size=18, stride=2),
-                                  # nn.Conv1d(1, 50, kernel_size=18, stride=2),#输出通道50，
+        self.p1_1 = nn.Sequential(
+                                  nn.Conv1d(1, 50, kernel_size=18, stride=2),#输出通道50，
                                   nn.BatchNorm1d(50),
                                   nn.ReLU(inplace=True))
         self.p1_2 = nn.Sequential(nn.Conv1d(50, 30, kernel_size=10, stride=2),
@@ -133,8 +89,8 @@ class CapsuleNet(nn.Module):
                                   nn.ReLU(inplace=True))
         self.p1_3 = nn.LPPool1d(2, kernel_size=2)
         # self.p1_3 = nn.MaxPool1d(kernel_size=2)
-        self.p2_1 = nn.Sequential(fast(out_channels=50, kernel_size=6, stride=1),
-                                  # nn.Conv1d(1, 50, kernel_size=6, stride=1),
+        self.p2_1 = nn.Sequential(
+                                  nn.Conv1d(1, 50, kernel_size=6, stride=1),
                                   nn.BatchNorm1d(50),
                                   nn.ReLU(inplace=True))
         self.p2_2 = nn.Sequential(nn.Conv1d(50, 40, kernel_size=6, stride=1),
