@@ -26,7 +26,7 @@ General combination model can achieve high accuracy, but it needs to redesign th
   pages={1-1},
   doi={10.1109/JSEN.2022.3169341}}
  ```
-# Our other work, welcome to cite them:
+# Our other work:
 
 ```html
 @article{ZHANG2022110242,  
