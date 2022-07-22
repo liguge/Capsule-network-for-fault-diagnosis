@@ -14,16 +14,17 @@ General combination model can achieve high accuracy, but it needs to redesign th
 ![209e0c251cd0d65a4aa918540c14c1f](https://user-images.githubusercontent.com/19371493/124874423-4f4a0080-dffa-11eb-95c3-744e39b9f5d8.png)
 ![0bc9c0c303ba9881ba1252682c5f172](https://user-images.githubusercontent.com/19371493/124874440-540eb480-dffa-11eb-88de-3957207370c9.png)
 ![1beeadd38fadf34998ffd97a47f0b03](https://user-images.githubusercontent.com/19371493/124874460-5a049580-dffa-11eb-9a76-c5abf236e853.png)
+
 # Welcome to cite it:
 ```html
 @ARTICLE{9761239,
-  author={Liu, Tingting and Chen, Biao and He, Chao and Liu, Zecheng and Zhang, Li},
+  author={Chen, Biao and Liu, Tingting and He, Chao and Liu, Zecheng and Zhang, Li},
   journal={IEEE Sensors Journal}, 
   title={Fault Diagnosis for Limited Annotation Signals and Strong Noise Based on Interpretable Attention Mechanism}, 
   year={2022},
-  volume={},
-  number={},
-  pages={1-1},
+  volume={22},
+  number={12},
+  pages={11865-11880},
   doi={10.1109/JSEN.2022.3169341}}
  ```
 # Our other work:
